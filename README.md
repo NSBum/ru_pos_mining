@@ -26,6 +26,7 @@ The application is tested on Python 3.7.4. Some non-core modules required includ
 
 - flask, flask_cors
 - yaml
+- docopt
 
 
 ## Usage
