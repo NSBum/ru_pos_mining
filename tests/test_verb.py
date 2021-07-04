@@ -605,3 +605,97 @@ class TestParseImperfectiveVerbB(unittest.TestCase):
     def testCanParsePresentActiveParticiple(self):
         actual = self.verb.present_active_participle
         self.assertEqual(actual, 'иду́щий')
+
+
+class TestParseImperfectiveVerbC(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.page = RuWikitionary('приглашать', True, 'verb_ipf_приглашать.html')
+        cls.verb = cls.page.parse_verb()
+
+    def testThatPageIsSet(self):
+        self.assertIsNotNone(self.page)
+
+    def testCanParsePage(self):
+        self.assertIsNotNone(self.page.root_tree)
+
+    def testCanParseVerb(self):
+        self.assertIsNotNone(self.verb)
+
+    def testCanExtractSpeechPart(self):
+        self.assertEqual(self.page.pos, SpeechPart.VERB)
+
+    def testCanParseFirstPersonSingularPresent(self):
+        actual = self.verb.present.singular.p1
+        self.assertEqual(actual, 'приглаша́ю')
+
+    def testCanParseFirstPersonPluralPresent(self):
+        actual = self.verb.present.plural.p1
+        self.assertEqual(actual, 'приглаша́ем')
+
+    def testCanParseSecondPersonSingularPresent(self):
+        actual = self.verb.present.singular.p2
+        self.assertEqual(actual, 'приглаша́ешь')
+
+    def testCanParseSecondPersonPluralPresent(self):
+        actual = self.verb.present.plural.p2
+        self.assertEqual(actual, 'приглаша́ете')
+
+    def testCanParseThirdPersonSingularPresent(self):
+        actual = self.verb.present.singular.p3
+        self.assertEqual(actual, 'приглаша́ет')
+
+    def testCanParseThirdPersonPluralPresent(self):
+        actual = self.verb.present.plural.p3
+        self.assertEqual(actual, 'приглаша́ют')
+
+    def testCanParsePastTenseMasculine(self):
+        actual = self.verb.past.masculine
+        self.assertEqual(actual, 'приглаша́л')
+
+    def testCanParsePastTenseFeminine(self):
+        actual = self.verb.past.feminine
+        self.assertEqual(actual, 'приглаша́ла')
+
+    def testCanParsePastTenseNeuter(self):
+        actual = self.verb.past.neuter
+        self.assertEqual(actual, 'приглаша́ло')
+
+    def testCanParsePastTensePlural(self):
+        actual = self.verb.past.plural
+        self.assertEqual(actual, 'приглаша́ли')
+
+    def testCanParseImperativeSingular(self):
+        actual = self.verb.imperative.singular
+        self.assertEqual(actual, 'приглаша́й')
+
+    def testCanParseImperativePlural(self):
+        actual = self.verb.imperative.plural
+        self.assertEqual(actual, 'приглаша́йте')
+
+    def testCanParsePastActiveParticiple(self):
+        actual = self.verb.past_active_participle
+        self.assertEqual(actual, 'приглаша́вший')
+
+    def testCanParsePastAdverbialParticiple(self):
+        # сде́лав, сде́лавши
+        actual = self.verb.past_adverbial_participle
+        self.assertIn('приглаша́в', actual)
+        self.assertIn('приглаша́вши', actual)
+
+    def testCanParsePastPassiveParticiple(self):
+        # This imperfective verb has no past passive participle
+        actual = self.verb.past_passive_participle
+        self.assertIsNone(actual)
+
+    def testCanParsePresentPassiveParticiple(self):
+        actual = self.verb.present_passive_participle
+        self.assertEqual('приглаша́емый', actual)
+
+    def testCanParsePresentAdverbialParticiple(self):
+        actual = self.verb.present_adverbial_participle
+        self.assertEqual(actual, 'приглаша́я')
+
+    def testCanParsePresentActiveParticiple(self):
+        actual = self.verb.present_active_participle
+        self.assertEqual(actual, 'приглаша́ющий')
