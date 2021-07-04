@@ -31,6 +31,20 @@ The application is tested on Python 3.7.4. Some non-core modules required includ
 
 ## Usage
 
+```buildoutcfg
+Usage:
+    main.py show RUWORD [--code=INFLECTION] [--format=FORMAT]
+    main.py runserver
+    main.py --version
+
+Options:
+    -h --help                           Show this screen.
+    --version                           Show version.
+    -c INFLECTION --code=INFLECTION     Return only form for code.
+    -f FORMAT --format=FORMAT           Output format 'json' or 'xml'. [default: json]
+```
+
+
 ## Testing
 
 The test suite includes over four hundred unit tests. To run the entire suite of tests:
