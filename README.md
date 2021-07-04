@@ -4,7 +4,7 @@ Russian part of speech mining.
 
 _N.B. This project is a work-in-progress._
 
-The project has a goal of extracting grammatical information, chiefly inflected forms of Russian words. I wrote this as part of a larger effort to build up my own database of linguistic data on the Russian language that currently resides in a variety of locations online.
+The project has a goal of extracting grammatical information, chiefly inflected forms of Russian words. I wrote this as part of a larger effort to build up my own database of linguistic data on the Russian language that currently resides in a variety of locations online. The application extracts grammatical data, chiefly inflections from the [Russian Wiktionary page](https://ru.wiktionary.org) for provided words.
 
 ## Parts of speech
 
