@@ -184,9 +184,13 @@ class RuWikitionary(object):
         :return: A Noun object or None
         """
         noun = Noun(self.word)
-        root_path = '//*[@id="mw-content-text"]/div[1]/table[contains(@class, "morfotable") and contains(@class, ' \
-                    '"ru")]/tbody/tr '
-        block = self.root_tree.xpath(root_path)
+        # some words, e.g. кошка have a table for every sense
+        # so we'll try to use only the first one for simplicity
+        pre_path = '//*[@id="mw-content-text"]/div[1]/table[contains(@class, "morfotable") and contains(@class, "ru")]'
+        pre_block = self.root_tree.xpath(pre_path)
+        tbody_block = pre_block[0].getchildren()
+        block = tbody_block[0].getchildren()
+
         for idx, case_row in enumerate(block):
             if idx != CaseTableRow.HEADER.value:
                 cell_block = case_row.xpath('td')
