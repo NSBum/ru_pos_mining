@@ -6,6 +6,8 @@ _N.B. This project is a work-in-progress._
 
 The project has a goal of extracting grammatical information, chiefly inflected forms of Russian words. I wrote this as part of a larger effort to build up my own database of linguistic data on the Russian language that currently resides in a variety of locations online. The application extracts grammatical data, chiefly inflections from the [Russian Wiktionary page](https://ru.wiktionary.org) for provided words.
 
+If desired, the application run as a server and return inflection data to the caller as json or xml.
+
 ## Parts of speech
 
 Currently, `ru_pos_mining` recognizes and extracts inflections for the following parts of speech:
@@ -43,7 +45,9 @@ Options:
     -c INFLECTION --code=INFLECTION     Return only form for code.
     -f FORMAT --format=FORMAT           Output format 'json' or 'xml'. [default: json]
 ```
+You can run the application as a server in which case, the following endpoints are currently available:
 
+- `GET /forms/гражданство` - get the inflection information for the word _гражданство_.
 
 ## Testing
 
