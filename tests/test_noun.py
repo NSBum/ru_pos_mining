@@ -425,3 +425,26 @@ class TestCanParseNounFeminineB(unittest.TestCase):
     def testCanParseInstrumentalPlural(self):
         actual = self.noun.instrumental.plural
         self.assertIn('соба́ками', actual)
+
+
+class TestCanParseNounFeminineC(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.page = RuWikitionary('кошка', True, 'noun_feminine_кошка.html')
+        cls.noun: Noun = cls.page.parse_noun()
+
+    def testThatPageIsSet(self):
+        self.assertIsNotNone(self.page)
+
+    def testCanParsePage(self):
+        self.assertIsNotNone(self.page.root_tree)
+
+    def testCanExtractSpeechPart(self):
+        self.assertEqual(self.page.pos, SpeechPart.NOUN)
+
+    # some words, e.g. кошка have multiple senses with multiple tables
+    # of declension. this test ensures that we're just capturing the
+    # first table
+    def testCaptureOnlySingleGenitivePlural(self):
+        actual = self.noun.genitive.plural
+        self.assertEqual(1, len(actual))
