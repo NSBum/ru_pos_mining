@@ -32,7 +32,7 @@ The application is tested on Python 3.7.4. Some non-core modules required includ
 
 ## Testing
 
-The test suite includes just under four hundred unit tests. To run the entire suite of tests:
+The test suite includes over four hundred unit tests. To run the entire suite of tests:
 
 ```lang-python
 python -m unittest
