@@ -1,0 +1,109 @@
+{ "inflections": [
+  { "NOUN": {
+      "singular": [
+      { "nominative": 1},
+      { "genitive": 3},
+      { "accusative": 5},
+      { "dative":  7},
+      { "instrumental": 9},
+      { "prepositional": 12},
+      { "locative": 17},
+      { "vocative": 15}
+    ],
+    "plural": [
+      { "nominative": 2},
+      { "genitive": 4},
+      { "accusative": 6},
+      { "dative":  8},
+      { "instrumental": 11},
+      { "prepositional": 14},
+      { "locative": 17},
+      { "vocative": 15}
+    ]
+  }
+     }
+    ,
+  { "pos": "ADJ",
+    "masculine": [
+      { "nominative": 200},
+      { "genitive": 201},
+      { "accusative": [
+        { "animate": 203}, { "inanimate": 204}
+      ]},
+      { "dative":  202},
+      { "instrumental": 205},
+      { "prepositional": 206}
+    ],
+    "feminine": [
+      { "nominative": 207},
+      { "genitive": 208},
+      { "accusative": 210},
+      { "dative":  209},
+      { "instrumental": 211},
+      { "prepositional": 213}
+    ],
+    "neuter": [
+      { "nominative": 214},
+      { "genitive": 215},
+      { "accusative": 217},
+      { "dative":  209},
+      { "instrumental": 218},
+      { "prepositional": 219}
+    ],
+    "plural": [
+      { "nominative": 220},
+      { "genitive": 221},
+      { "accusative": [
+        { "animate": 223}, { "inanimate": 224}
+      ]},
+      { "dative":  222},
+      { "instrumental": 225},
+      { "prepositional": 226}
+    ],
+    "short": [
+      {"masculine": 229},
+      {"feminine": 230},
+      {"neuter": 231},
+      {"plural": 232}
+    ],
+    "comparative": 227,
+    "superlative": 228
+  },
+  {
+    "pos": "VERB",
+    "imperative": {
+      "singular": 300,
+      "plural": 301
+    },
+    "past": [
+      {"masculine": 302},
+      {"feminine": 303},
+      {"neuter": 304},
+      {"plural": 305}
+    ],
+    "present": [
+      {"singular": [
+        {"1": 306},
+        {"2": 307},
+        {"3": 308}
+      ]},
+      {"plural": [
+        {"1": 309},
+        {"2": 310},
+        {"3": 311}
+      ]}
+    ],
+    "future": [
+      {"singular": [
+        {"1": 312},
+        {"2": 313},
+        {"3": 314}
+      ]},
+      {"plural": [
+        {"1": 315},
+        {"2": 316},
+        {"3": 317}
+      ]}
+    ]
+  }
+]}

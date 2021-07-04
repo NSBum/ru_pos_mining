@@ -1,0 +1,134 @@
+--- 
+adj: 
+  feminine: 
+    nominative: 207
+    genitive: 208
+    dative: 209
+    accusative: 210
+    instrumental: 211
+    prepositional: 213
+  masculine: 
+    nominative: 200
+    genitive: 201
+    dative: 202
+    accusative: 
+      animate: 203
+      inanimate: 204
+    instrumental: 205
+    prepositional: 206
+  neuter: 
+    nominative: 214
+    genitive: 215
+    dative: 216
+    accusative: 217
+    instrumental: 218
+    prepositional: 219
+  plural:
+    nominative: 220
+    genitive: 221
+    dative: 222
+    accusative: 
+      animate: 223
+      inanimate: 224
+    instrumental: 225
+    prepositional: 226
+  comparative: 227
+  superalative: 228
+  short:
+    masculine: 229
+    feminine: 230
+    neuter: 231
+    plural: 232
+noun: 
+  plural: 
+    nominative: 2
+    genitive: 4
+    dative: 8
+    accusative: 6
+    instrumental: 11
+    prepositional: 14
+    locative: 17
+    vocative: 15
+  singular: 
+    nominative: 1
+    genitive: 3
+    dative: 7
+    accusative: 5
+    instrumental: 9
+    prepositional: 12
+    locative: 17
+    vocative: 15
+verb:
+  imperative:
+    singular: 300
+    plural: 301
+  past:
+    masculine: 302
+    feminine: 303
+    neuter: 304
+    plural: 305
+  present:
+    singular:
+      first_person: 306
+      second_person: 307
+      third_person: 308
+    plural:
+      first_person: 309
+      second_person: 310
+      third_person: 311
+  future:
+    singular:
+      first_person: 312
+      second_person: 313
+      third_person: 314
+    plural:
+      first_person: 315
+      second_person: 316
+      third_person: 317
+  participle:
+    active:
+      present: 318
+      past: 319
+    adverbial:
+      present: 320
+      past: 321
+    passive:
+      present: 322
+      past: 323
+pronoun_possessive:
+  feminine:
+    nominative: 407
+    genitive: 408
+    dative: 409
+    accusative: 410
+    instrumental: 411
+    prepositional: 413
+  masculine:
+    nominative: 400
+    genitive: 401
+    dative: 402
+    accusative:
+      animate: 403
+      inanimate: 404
+    instrumental: 405
+    prepositional: 406
+  neuter:
+    nominative: 414
+    genitive: 415
+    dative: 416
+    accusative: 417
+    instrumental: 418
+    prepositional: 419
+  plural:
+    nominative: 420
+    genitive: 421
+    dative: 422
+    accusative:
+      animate: 423
+      inanimate: 424
+    instrumental: 425
+    prepositional: 426
+adv: 500
+prep: 600
+num: 700
+pron: 800
