@@ -165,7 +165,7 @@ class RuWikitionary(object):
             return SpeechPart.PRONOUN_POSSESSIVE
         elif 'существительное' in b_str:
             return SpeechPart.NOUN
-        elif 'прилагательное' in b_str:
+        elif 'прилагательное' in b_str and 'числительное' not in b_str:
             return SpeechPart.ADJECTIVE
         elif 'наречие' in b_str:
             return SpeechPart.ADVERB
@@ -177,6 +177,8 @@ class RuWikitionary(object):
             return SpeechPart.PRONOUN
         elif 'глагол' in b_str:
             return SpeechPart.VERB
+        elif 'союз' in b_str:
+            return SpeechPart.CONJUNCTION
 
     def parse_noun(self) -> Optional[Noun]:
         """
