@@ -362,3 +362,27 @@ class TestCodeToTermVerb(unittest.TestCase):
 
     def testCode323(self):
         self.assertEqual('verb, past passive participle', code2term(323))
+
+
+class TestCode2TermPronoun(unittest.TestCase):
+    def checkCode(self, term: str, code: int):
+        self.assertEqual(term, code2term(code))
+
+    def testCode801(self):
+        self.checkCode('pronoun, nominative', 801)
+
+    def testCode802(self):
+        self.checkCode('pronoun, genitive', 802)
+
+    def testCode803(self):
+        self.checkCode('pronoun, dative', 803)
+
+    def testCode804(self):
+        self.checkCode('pronoun, accusative', 804)
+
+    def testCode805(self):
+        self.checkCode('pronoun, instrumental', 805)
+
+    def testCode806(self):
+        self.checkCode('pronoun, prepositional', 806)
+

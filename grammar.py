@@ -221,6 +221,11 @@ def code2term(code: int) -> str:
             else:
                 return None
         desc = append_verb_pos(code, prefix)
+    elif 801 <= code < 900:
+        prefix = "pronoun"
+
+        desc = append_case_min_has_animate('pronoun', code, 801, False)
+
     return desc
 
 
