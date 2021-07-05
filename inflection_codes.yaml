@@ -131,4 +131,11 @@ pronoun_possessive:
 adv: 500
 prep: 600
 num: 700
-pron: 800
+pron:
+  unspecified: 800
+  nominative: 801
+  genitive: 802
+  dative: 803
+  accusative: 804
+  instrumental: 805
+  prepositional: 806

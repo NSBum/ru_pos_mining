@@ -215,6 +215,24 @@ class RuWikitionary(object):
                             noun.add_form_case_name(encase, issingular, [form])
         return noun
 
+    def parse_pronoun(self) -> Optional[Pronoun]:
+        pronoun = Pronoun(self.word)
+        # this is a little fragile but unless the page formatting
+        # changes drastically, it should work because just relying on the order
+        # of tables on the page is too variable
+        table_rules = 'contains(@rules, "all") and contains(@width, "210")'
+        table_path = f'//table[{table_rules}]/tbody/tr'
+        block = self.root_tree.xpath(table_path)
+        for idx, case_row in enumerate(block):
+            if idx < 1:
+                continue
+            else:
+                td = case_row.getchildren()[1]
+                cases = [NounCaseType.NOMINATIVE, NounCaseType.GENITIVE, NounCaseType.DATIVE,
+                         NounCaseType.ACCUSATIVE, NounCaseType.INSTRUMENTAL, NounCaseType.PREPOSITIONAL]
+                pronoun.add_form(cases[idx-1], td.text.strip())
+        return pronoun
+
     def parse_adjective(self) -> Optional[Adjective]:
         """
         Parses the page for adjective inflection.
@@ -459,3 +477,5 @@ class RuWikitionary(object):
             return self.parse_verb()
         elif self.pos == SpeechPart.PRONOUN_POSSESSIVE:
             return self.parse_possessive_pronoun()
+        elif self.pos == SpeechPart.PRONOUN:
+            return self.parse_pronoun()

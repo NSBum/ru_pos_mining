@@ -356,6 +356,36 @@ class Word(object):
         self.pos = pos
 
 
+class Pronoun(Word):
+    def __init__(self, word):
+        super().__init__(word, SpeechPart.PRONOUN)
+        self.nominative: Optional[str]
+        self.genitive: Optional[str]
+        self.dative: Optional[str]
+        self.accusative: Optional[str]
+        self.instrumental: Optional[str]
+        self.prepositional: Optional[str]
+
+    def add_form(self, case_type: NounCaseType, word):
+        # ignore cases that pronouns do not have
+        if case_type in (NounCaseType.VOCATIVE, NounCaseType.LOCATIVE):
+            return
+        property_name = NounCaseType.case_name_for_type(case_type)
+        setattr(self, property_name, word)
+
+    @property
+    @lru_cache()
+    def inflection_code_list(self):
+        with open('inflection_codes.yaml') as file:
+            inflection_codes = yaml.safe_load(file)
+        cases = ['nominative', 'genitive', 'dative', 'accusative', 'instrumental', 'prepositional']
+        export_words = []
+        for casestr in cases:
+            code = inflection_codes['pron'][casestr]
+            export_words.append((getattr(self, casestr), code))
+        return export_words
+
+
 class Noun(Word):
     """
     A single noun word and all of its inflected forms
