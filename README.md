@@ -16,6 +16,7 @@ Currently, `ru_pos_mining` recognizes and extracts inflections for the following
 - Noun
 - Adjective
 - Possessive pronoun
+- Pronoun (e.g. что, кто...)
 
 
 ## Installation
