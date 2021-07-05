@@ -35,17 +35,19 @@ def serve_word(w):
     w_page = RuWikitionary(ru_word, False)
     w_tree = w_page.root_tree
     w_word = w_page.parse()
-
-    w_output = {'in': ru_word, 'pos': w_page.pos.to_upos()}
-    w_outforms = []
-    try:
-        for w in w_word.inflection_code_list:
-            (term, inflection_code) = w
-            description = code2term(inflection_code)
-            w_outforms.append({'code': inflection_code, 'form': term, 'desc': description})
-        w_output['forms'] = w_outforms
-    except AttributeError:
-        pass
+    if w_page.pos is None:
+        w_output = {'in': ru_word, 'error': 'Not found. Is this an uninflected form? Spelling?'}
+    else:
+        w_output = {'in': ru_word, 'pos': w_page.pos.to_upos()}
+        w_outforms = []
+        try:
+            for w in w_word.inflection_code_list:
+                (term, inflection_code) = w
+                description = code2term(inflection_code)
+                w_outforms.append({'code': inflection_code, 'form': term, 'desc': description})
+            w_output['forms'] = w_outforms
+        except AttributeError:
+            pass
     # print(w_word.inflection_code_list)
     return jsonify(w_output)
 

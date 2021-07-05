@@ -127,7 +127,10 @@ class RuWikitionary(object):
         ]
         randomint = random.randint(0, 9)
         headers = {'user-agent': user_agents[randomint]}
-        response = urlopen(Request(self.url, headers=headers))
+        try:
+            response = urlopen(Request(self.url, headers=headers))
+        except urllib.error.HTTPError:
+            response = None
         return response
 
     @property
@@ -137,6 +140,8 @@ class RuWikitionary(object):
         The root tree for the Russian word page.
         :return: The root tree for the page
         """
+        if self.url_response is None:
+            return None
         htmlparser = etree.HTMLParser()
         if self.use_local:
             tree = etree.parse(f'html_samples/{self.local_fn}', htmlparser)
@@ -159,6 +164,8 @@ class RuWikitionary(object):
         Accessor for the part of speech property
         :return:
         """
+        if self.root_tree is None:
+            return None
         b = self.root_tree.xpath('''//*[@id="mw-content-text"]/div[1]/p[2]//text()''')
         b_str = ' '.join([x.strip() for x in b]).lower()
         if 'притяжательное местоимение' in b_str:
