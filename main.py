@@ -37,7 +37,11 @@ def serve_word(w):
     w_word = w_page.parse()
 
     w_output = {'in': ru_word, 'pos': w_page.pos.to_upos()}
-    w_outforms = [{f'{x[1]}': x[0]} for x in w_word.inflection_code_list]
+    w_outforms = []
+    for w in w_word.inflection_code_list:
+        (term, inflection_code) = w
+        description = code2term(inflection_code)
+        w_outforms.append({'code': inflection_code, 'form': term, 'desc': description})
     w_output['forms'] = w_outforms
     print(w_word.inflection_code_list)
     return jsonify(w_output)
