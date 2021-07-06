@@ -140,12 +140,12 @@ class RuWikitionary(object):
         The root tree for the Russian word page.
         :return: The root tree for the page
         """
-        if self.url_response is None:
-            return None
         htmlparser = etree.HTMLParser()
         if self.use_local:
             tree = etree.parse(f'html_samples/{self.local_fn}', htmlparser)
         else:
+            if self.url_response is None:
+                return None
             tree = etree.parse(self.url_response, htmlparser)
         # could use scrapy for this
         # but if you read() the url_response, it consumes it
@@ -170,6 +170,8 @@ class RuWikitionary(object):
         b_str = ' '.join([x.strip() for x in b]).lower()
         if 'притяжательное местоимение' in b_str:
             return SpeechPart.PRONOUN_POSSESSIVE
+        elif 'указательное' in b_str and  'местоимение' in b_str:
+            return SpeechPart.PRONOUN_DEMONSTRATIVE
         elif 'существительное' in b_str:
             return SpeechPart.NOUN
         elif 'прилагательное' in b_str and 'числительное' not in b_str:
@@ -195,6 +197,7 @@ class RuWikitionary(object):
         noun = Noun(self.word)
         # some words, e.g. кошка have a table for every sense
         # so we'll try to use only the first one for simplicity
+        # //*[@id="mw-content-text"]/div[1]/table[2]
         pre_path = '//*[@id="mw-content-text"]/div[1]/table[contains(@class, "morfotable") and contains(@class, "ru")]'
         pre_block = self.root_tree.xpath(pre_path)
         tbody_block = pre_block[0].getchildren()
@@ -473,6 +476,66 @@ class RuWikitionary(object):
                 last_row_words = row_words
         return pronoun
 
+    def parse_demonstrative_pronoun(self) -> Optional[DemonstrativePronoun]:
+        """
+        Extracts declension information for a demonstrative pronoun.
+        :return: A PossessivePronoun object or None
+        """
+        pronoun = DemonstrativePronoun(self.word)
+        state = AdjectiveParseStates.START_PARSING
+        root_path = '//*[@id="mw-content-text"]/div[1]/table[contains(@class, "morfotable") and contains(@class, ' \
+                    '"ru")]/tbody/tr'
+        block = self.root_tree.xpath(root_path)
+        last_row_words = []
+        for idx, case_row in enumerate(block):
+            if idx < 2:
+                continue
+            else:
+                inner_idx = 0
+                casestr = None
+                adjforms = ['masculine', 'feminine', 'neuter', 'plural']
+                row_words = []
+                for cell_idx, cell in enumerate(case_row.xpath('td')):
+                    # read the <td>/<a> title
+                    if idx == AdjectiveTableRow.ACCUSATIVE_ANIMATE.value:
+                        if cell_idx > 1:
+                            row_words.append(cell.text.strip())
+                    elif idx == AdjectiveTableRow.ACCUSATIVE_INANIMATE.value:
+                        # accusative inanimate is tricky because the neuter and feminine
+                        # forms aren't listed in the table
+                        if cell_idx == 1:
+                            row_words.append(cell.text.strip())
+                            # add add the neuter and feminine forms that are missing from table
+                            row_words.extend(last_row_words[1:3])
+                        elif cell_idx > 1:
+                            row_words.append(cell.text.strip())
+                    elif idx == AdjectiveTableRow.INSTRUMENTAL.value:
+                        if cell_idx > 0:
+                            ct = ' '.join(cell.itertext()).strip()
+                            row_words.append(ct)
+                    else:
+                        if cell_idx > 0:
+                            row_words.append(cell.text.strip())
+                    if cell_idx == 0:
+                        a_block = cell.xpath('a')
+                        case_or_animacy_text = a_block[0].get('title')
+                if idx == AdjectiveTableRow.NOMINATIVE.value:
+                    pronoun.nominative = AdjectiveInflection.from_term_list(row_words)
+                elif idx == AdjectiveTableRow.GENITIVE.value:
+                    pronoun.genitive = AdjectiveInflection.from_term_list(row_words)
+                elif idx == AdjectiveTableRow.DATIVE.value:
+                    pronoun.dative = AdjectiveInflection.from_term_list(row_words)
+                elif idx == AdjectiveTableRow.INSTRUMENTAL.value:
+                    pronoun.instrumental = AdjectiveInflection.from_term_list(row_words)
+                elif idx == AdjectiveTableRow.PREPOSITIONAL.value:
+                    pronoun.prepositional = AdjectiveInflection.from_term_list(row_words)
+                elif idx == AdjectiveTableRow.ACCUSATIVE_ANIMATE.value:
+                    pronoun.accusative_animate = AdjectiveInflection.from_term_list(row_words)
+                elif idx == AdjectiveTableRow.ACCUSATIVE_INANIMATE.value:
+                    pronoun.accusative_inanimate = AdjectiveInflection.from_term_list(row_words)
+                last_row_words = row_words
+        return pronoun
+
     def parse(self) -> Union[Verb, Adjective, Noun, PossessivePronoun, None]:
         """
         Parses the page for inflection info, returning the appropriate part of speech object
@@ -488,3 +551,5 @@ class RuWikitionary(object):
             return self.parse_possessive_pronoun()
         elif self.pos == SpeechPart.PRONOUN:
             return self.parse_pronoun()
+        elif self.pos == SpeechPart.PRONOUN_DEMONSTRATIVE:
+            return self.parse_demonstrative_pronoun()

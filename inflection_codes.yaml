@@ -139,3 +139,36 @@ pron:
   accusative: 804
   instrumental: 805
   prepositional: 806
+pronoun_demonstrative:
+  feminine:
+    nominative: 907
+    genitive: 908
+    dative: 909
+    accusative: 910
+    instrumental: 911
+    prepositional: 913
+  masculine:
+    nominative: 900
+    genitive: 901
+    dative: 902
+    accusative:
+      animate: 903
+      inanimate: 904
+    instrumental: 905
+    prepositional: 906
+  neuter:
+    nominative: 914
+    genitive: 915
+    dative: 916
+    accusative: 917
+    instrumental: 918
+    prepositional: 919
+  plural:
+    nominative: 920
+    genitive: 921
+    dative: 922
+    accusative:
+      animate: 923
+      inanimate: 924
+    instrumental: 925
+    prepositional: 926

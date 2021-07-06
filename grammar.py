@@ -225,6 +225,21 @@ def code2term(code: int) -> str:
         prefix = "pronoun"
 
         desc = append_case_min_has_animate('pronoun', code, 801, False)
+    elif 900 <= code < 1000:
+        prefix = 'demonstrative pronoun'
+
+        if 900 <= code <= 906:
+            desc = f'{prefix}, masculine'
+            desc = append_case_min_has_animate(desc, code, 900, True)
+        elif 907 <= code <= 913:
+            desc = f'{prefix}, feminine'
+            desc = append_case_min_has_animate(desc, code, 907, False)
+        elif 914 <= code <= 919:
+            desc = f'{prefix}, neuter'
+            desc = append_case_min_has_animate(desc, code, 914, False)
+        elif 920 <= code <= 926:
+            desc = f'{prefix}, plural'
+            desc = append_case_min_has_animate(desc, code, 920, True)
 
     return desc
 
@@ -242,13 +257,14 @@ class SpeechPart(Enum):
     NUMERAL = auto()
     PRONOUN = auto()
     CONJUNCTION = auto()
+    PRONOUN_DEMONSTRATIVE = auto()
 
     def to_upos(self):
         """
         Converts SpeechPart enumeration to universal POS (UPOS)
         :return: UPOS string for this SpeechPart
         """
-        upos_list = ['NOUN', 'ADJ', 'VERB', 'ADV', 'PRON', 'ADP', 'NUM', 'PRON', 'CCONJ']
+        upos_list = ['NOUN', 'ADJ', 'VERB', 'ADV', 'PRON', 'ADP', 'NUM', 'PRON', 'CCONJ', 'PRON']
         try:
             return upos_list[self.value - 1]
         except IndexError:
@@ -568,6 +584,22 @@ class PossessivePronoun(AdjectiveLike):
         :return: Returns the object's code prefix
         """
         return 'pronoun_possessive'
+
+
+class DemonstrativePronoun(AdjectiveLike):
+    """
+        A demonstrative pronoun object, like этот, тот, etc.
+        """
+
+    def __init__(self, word: str):
+        super().__init__(word, SpeechPart.PRONOUN_DEMONSTRATIVE)
+
+    def code_prefix(self):
+        """
+        Returns the object's code prefix for inflection code discovery
+        :return: Returns the object's code prefix
+        """
+        return 'pronoun_demonstrative'
 
 
 class VerbTensePlurality(object):

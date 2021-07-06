@@ -75,6 +75,7 @@ if __name__ == "__main__":
         tree = page.root_tree
         # print(page.pos)
         word = page.parse()
+        print(word.inflection_code_list)
         if arguments['--code']:
             code = int(arguments['--code'])
             words = [w[0] for w in word.inflection_code_list if w[1] == code]
@@ -98,4 +99,4 @@ if __name__ == "__main__":
 
 
 
-        # print(word.inflection_code_list)
+

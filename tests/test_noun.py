@@ -214,7 +214,7 @@ class TestNounVocativeInflectionCodes(TestNounInflectionCodes):
 class TestCanParseNounA(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.page = RuWikitionary('дошколница', True, 'noun_sample_01.html')
+        cls.page = RuWikitionary('дошкольница', True, 'noun_sample_01.html')
         cls.noun: Noun = cls.page.parse_noun()
 
     def testThatPageIsSet(self):
