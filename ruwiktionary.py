@@ -269,8 +269,11 @@ class RuWikitionary(object):
                         a_block = cell.xpath('a')
                         case_or_animacy_text = a_block[0].get('title')
                     else:
-                        celltext = cell.text.strip()
-                        row_words.append(celltext)
+                        try:
+                            celltext = cell.text.strip()
+                            row_words.append(celltext)
+                        except AttributeError:
+                            pass
                 if idx == AdjectiveTableRow.NOMINATIVE.value:
                     adjective.nominative = AdjectiveInflection.from_term_list(row_words)
                 elif idx == AdjectiveTableRow.GENITIVE.value:
@@ -282,7 +285,8 @@ class RuWikitionary(object):
                 elif idx == AdjectiveTableRow.PREPOSITIONAL.value:
                     adjective.prepositional = AdjectiveInflection.from_term_list(row_words)
                 elif idx == AdjectiveTableRow.ACCUSATIVE_ANIMATE.value:
-                    row_words = row_words[1:]
+                    # exclude list items that aren't actual words
+                    row_words = [w for w in row_words if len(w) > 1]
                     adjective.accusative_animate = AdjectiveInflection.from_term_list(row_words)
                 elif idx == AdjectiveTableRow.ACCUSATIVE_INANIMATE.value:
                     row_words[1:1] = [adjective.accusative_animate.neuter, adjective.accusative_animate.feminine]
