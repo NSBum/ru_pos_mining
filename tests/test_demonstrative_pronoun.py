@@ -49,3 +49,64 @@ class TestCanParseDemonstrativePronounA(unittest.TestCase):
 
     def testCanParseGenitivePlural(self):
         self.assertIn(self.pronoun.genitive.plural, 'э́тих')
+
+    def testCanParseDativeMasculine(self):
+        self.assertIn(self.pronoun.dative.masculine, 'э́тому')
+
+    def testCanParseDativeFeminine(self):
+        self.assertIn(self.pronoun.dative.feminine, 'э́той')
+
+    def testCanParseDativeNeuter(self):
+        self.assertIn(self.pronoun.dative.neuter, 'э́тому')
+
+    def testCanParseDativePlural(self):
+        self.assertIn(self.pronoun.dative.plural, 'э́тим')
+
+    def testCanParseAccusativeInanimateMasculine(self):
+        self.assertIn(self.pronoun.accusative_inanimate.masculine, 'э́тот')
+
+    def testCanParseAccusativeInanimateFeminine(self):
+        self.assertIn(self.pronoun.accusative_inanimate.feminine, 'э́ту')
+
+    def testCanParseAccusativeInanimateNeuter(self):
+        self.assertIn(self.pronoun.accusative_inanimate.neuter, 'э́то')
+
+    def testCanParseAccusativeInanimatePlural(self):
+        self.assertIn(self.pronoun.accusative_inanimate.plural, 'э́ти')
+
+    def testCanParseAccusativeAnimateMasculine(self):
+        self.assertIn(self.pronoun.accusative_animate.masculine, 'э́того')
+
+    def testCanParseAccusativeAnimateFeminine(self):
+        self.assertIn(self.pronoun.accusative_animate.feminine, 'э́ту')
+
+    def testCanParseAccusativeAanimateNeuter(self):
+        self.assertIn(self.pronoun.accusative_animate.neuter, 'э́то')
+
+    def testCanParseAccusativeAnimatePlural(self):
+        self.assertIn(self.pronoun.accusative_animate.plural, 'э́тих')
+
+    def testCanParseInstrumentalMasculine(self):
+        self.assertIn(self.pronoun.instrumental.masculine, 'э́тим')
+
+    def testCanParseInstrumentalFeminine(self):
+        self.assertIn('э́той', self.pronoun.instrumental.feminine)
+        self.assertIn('э́тою', self.pronoun.instrumental.feminine)
+
+    def testCanParseInstrumentalNeuter(self):
+        self.assertIn(self.pronoun.instrumental.neuter, 'э́тим')
+
+    def testCanParseInstrumentalPlural(self):
+        self.assertIn(self.pronoun.instrumental.plural, 'э́тими')
+
+    def testCanParsePrepositionalMasculine(self):
+        self.assertIn('э́том', self.pronoun.prepositional.masculine)
+
+    def testCanParsePrepositionalNeuter(self):
+        self.assertIn('э́том', self.pronoun.prepositional.neuter)
+
+    def testCanParsePrepositinalFeminine(self):
+        self.assertIn('э́той', self.pronoun.prepositional.feminine)
+
+    def testCanParsePrepositinalPlural(self):
+        self.assertIn('э́тих', self.pronoun.prepositional.plural)
