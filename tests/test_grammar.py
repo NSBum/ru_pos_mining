@@ -386,3 +386,16 @@ class TestCode2TermPronoun(unittest.TestCase):
     def testCode806(self):
         self.checkCode('pronoun, prepositional', 806)
 
+
+class TestCode2TermDemonstrativePronoun(unittest.TestCase):
+    def c(self, term: str, code: int):
+        self.assertEqual(term, code2term(code))
+
+    def testCode900(self):
+        self.c('demonstrative pronoun, masculine, nominative', 900)
+
+    def testCode901(self):
+        self.c('demonstrative pronoun, masculine, genitive', 901)
+
+    # todo finish inflection code tests for demonstrative pronouns
+
