@@ -258,13 +258,16 @@ class SpeechPart(Enum):
     PRONOUN = auto()
     CONJUNCTION = auto()
     PRONOUN_DEMONSTRATIVE = auto()
+    PARTICLE = auto()
+    INTERJECTION = auto()
 
     def to_upos(self):
         """
         Converts SpeechPart enumeration to universal POS (UPOS)
         :return: UPOS string for this SpeechPart
         """
-        upos_list = ['NOUN', 'ADJ', 'VERB', 'ADV', 'PRON', 'ADP', 'NUM', 'PRON', 'CCONJ', 'PRON']
+        upos_list = ['NOUN', 'ADJ', 'VERB', 'ADV', 'PRON', 'ADP', 'NUM', 'PRON',
+                     'CCONJ', 'PRON', 'PART', 'INTJ']
         try:
             return upos_list[self.value - 1]
         except IndexError:

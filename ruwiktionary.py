@@ -184,10 +184,14 @@ class RuWikitionary(object):
             return SpeechPart.NUMERAL
         elif 'местоимение' in b_str:
             return SpeechPart.PRONOUN
-        elif 'глагол' in b_str:
+        elif 'глагол' in b_str and 'частица' not in b_str:
             return SpeechPart.VERB
         elif 'союз' in b_str:
             return SpeechPart.CONJUNCTION
+        elif 'частица' in b_str:
+            return SpeechPart.PARTICLE
+        elif 'междометие' in b_str:
+            return SpeechPart.INTERJECTION
 
     def parse_noun(self) -> Optional[Noun]:
         """
