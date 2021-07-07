@@ -58,13 +58,6 @@ class CaseTranslateDirection(Enum):
     EN2RU = 1
 
 
-class AdjectiveParseStates(Enum):
-    START_PARSING = auto()
-    START_ACCUSATIVE = auto()
-    START_ANIMATE = auto()
-    START_INANIMATE = auto()
-
-
 def cyrillic(text):
     return html.unescape(text)
 
@@ -255,7 +248,6 @@ class RuWikitionary(object):
         :return: Either a parse Adjective object or None
         """
         adjective = Adjective(self.word)
-        state = AdjectiveParseStates.START_PARSING
         root_path = '//*[@id="mw-content-text"]/div[1]/table[contains(@class, "morfotable") and contains(@class, ' \
                     '"ru")]/tbody/tr'
         block = self.root_tree.xpath(root_path)
@@ -430,7 +422,6 @@ class RuWikitionary(object):
         :return: A PossessivePronoun object or None
         """
         pronoun = PossessivePronoun(self.word)
-        state = AdjectiveParseStates.START_PARSING
         root_path = '//*[@id="mw-content-text"]/div[1]/table[contains(@class, "morfotable") and contains(@class, ' \
                     '"ru")]/tbody/tr'
         block = self.root_tree.xpath(root_path)
@@ -490,7 +481,6 @@ class RuWikitionary(object):
         :return: A PossessivePronoun object or None
         """
         pronoun = DemonstrativePronoun(self.word)
-        state = AdjectiveParseStates.START_PARSING
         root_path = '//*[@id="mw-content-text"]/div[1]/table[contains(@class, "morfotable") and contains(@class, ' \
                     '"ru")]/tbody/tr'
         block = self.root_tree.xpath(root_path)
