@@ -261,6 +261,33 @@ class SpeechPart(Enum):
     PARTICLE = auto()
     INTERJECTION = auto()
 
+    @classmethod
+    def from_wiki_text(cls, b_str: str):
+        if 'притяжательное местоимение' in b_str:
+            return SpeechPart.PRONOUN_POSSESSIVE
+        elif 'указательное' in b_str and 'местоимение' in b_str:
+            return SpeechPart.PRONOUN_DEMONSTRATIVE
+        elif 'существительное' in b_str:
+            return SpeechPart.NOUN
+        elif 'прилагательное' in b_str and 'числительное' not in b_str:
+            return SpeechPart.ADJECTIVE
+        elif 'наречие' in b_str:
+            return SpeechPart.ADVERB
+        elif 'предлог' in b_str:
+            return SpeechPart.PREPOSITION
+        elif 'числительное' in b_str:
+            return SpeechPart.NUMERAL
+        elif 'местоимение' in b_str:
+            return SpeechPart.PRONOUN
+        elif 'глагол' in b_str and 'частица' not in b_str:
+            return SpeechPart.VERB
+        elif 'союз' in b_str:
+            return SpeechPart.CONJUNCTION
+        elif 'частица' in b_str:
+            return SpeechPart.PARTICLE
+        elif 'междометие' in b_str:
+            return SpeechPart.INTERJECTION
+
     def to_upos(self):
         """
         Converts SpeechPart enumeration to universal POS (UPOS)

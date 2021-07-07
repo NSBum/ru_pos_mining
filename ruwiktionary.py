@@ -150,6 +150,11 @@ class RuWikitionary(object):
         # extract_str = ''.join(extract_list)
         return tree
 
+    def alternate_morphology(self):
+        b = self.root_tree.xpath('''//*[@id="mw-content-text"]/div[1]/p[3]//text()''')
+        b_str = ' '.join([x.strip() for x in b]).lower()
+        return b_str
+
     @property
     @lru_cache()
     def pos(self):
@@ -161,30 +166,11 @@ class RuWikitionary(object):
             return None
         b = self.root_tree.xpath('''//*[@id="mw-content-text"]/div[1]/p[2]//text()''')
         b_str = ' '.join([x.strip() for x in b]).lower()
-        if 'притяжательное местоимение' in b_str:
-            return SpeechPart.PRONOUN_POSSESSIVE
-        elif 'указательное' in b_str and  'местоимение' in b_str:
-            return SpeechPart.PRONOUN_DEMONSTRATIVE
-        elif 'существительное' in b_str:
-            return SpeechPart.NOUN
-        elif 'прилагательное' in b_str and 'числительное' not in b_str:
-            return SpeechPart.ADJECTIVE
-        elif 'наречие' in b_str:
-            return SpeechPart.ADVERB
-        elif 'предлог' in b_str:
-            return SpeechPart.PREPOSITION
-        elif 'числительное' in b_str:
-            return SpeechPart.NUMERAL
-        elif 'местоимение' in b_str:
-            return SpeechPart.PRONOUN
-        elif 'глагол' in b_str and 'частица' not in b_str:
-            return SpeechPart.VERB
-        elif 'союз' in b_str:
-            return SpeechPart.CONJUNCTION
-        elif 'частица' in b_str:
-            return SpeechPart.PARTICLE
-        elif 'междометие' in b_str:
-            return SpeechPart.INTERJECTION
+        # preposition like в, с, к can fail because their morphological information
+        # is not in the usual spot
+        if b_str.strip() == self.word:
+            b_str = self.alternate_morphology()
+        return SpeechPart.from_wiki_text(b_str)
 
     def parse_noun(self) -> Optional[Noun]:
         """
