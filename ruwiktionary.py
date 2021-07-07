@@ -547,7 +547,7 @@ class RuWikitionary(object):
     def parse(self) -> Union[Verb, Adjective, Noun, PossessivePronoun, None]:
         """
         Parses the page for inflection info, returning the appropriate part of speech object
-        :return: Any of Verb, Adjective, Noun, or PossessivePronoun objects (or None)
+        :return: Any of Verb, Adjective, Noun, DemonstrativePronoun, or PossessivePronoun objects (or None)
         """
         if self.pos == SpeechPart.NOUN:
             return self.parse_noun()
