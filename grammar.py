@@ -231,12 +231,12 @@ def code2term(code: int) -> str:
         if 900 <= code <= 906:
             desc = f'{prefix}, masculine'
             desc = append_case_min_has_animate(desc, code, 900, True)
-        elif 907 <= code <= 913:
+        elif 907 <= code <= 912:
             desc = f'{prefix}, feminine'
             desc = append_case_min_has_animate(desc, code, 907, False)
-        elif 914 <= code <= 919:
+        elif 913 <= code <= 918:
             desc = f'{prefix}, neuter'
-            desc = append_case_min_has_animate(desc, code, 914, False)
+            desc = append_case_min_has_animate(desc, code, 913, False)
         elif 920 <= code <= 926:
             desc = f'{prefix}, plural'
             desc = append_case_min_has_animate(desc, code, 920, True)
