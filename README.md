@@ -52,7 +52,7 @@ You can run the application as a server in which case, the following endpoints a
 
 ## Testing
 
-The test suite includes over four hundred unit tests. To run the entire suite of tests:
+The test suite includes over five hundred unit tests. To run the entire suite of tests:
 
 ```lang-python
 python -m unittest
