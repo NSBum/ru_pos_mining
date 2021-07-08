@@ -365,7 +365,7 @@ class TestCodeToTermVerb(unittest.TestCase):
 
 
 class TestCode2TermPronoun(unittest.TestCase):
-    def checkCode(self, term: str, code: int):
+    def checkCode(self, term: Optional[str], code: int):
         self.assertEqual(term, code2term(code))
 
     def testCode801(self):
@@ -386,9 +386,13 @@ class TestCode2TermPronoun(unittest.TestCase):
     def testCode806(self):
         self.checkCode('pronoun, prepositional', 806)
 
+    # non-declinable pronouns do not have codes > 806
+    def testCode807(self):
+        self.checkCode(None, 807)
+
 
 class TestCode2TermDemonstrativePronoun(unittest.TestCase):
-    def c(self, term: str, code: int):
+    def c(self, term: Optional[str], code: int):
         self.assertEqual(term, code2term(code))
 
     def testCode900(self):
@@ -397,5 +401,83 @@ class TestCode2TermDemonstrativePronoun(unittest.TestCase):
     def testCode901(self):
         self.c('demonstrative pronoun, masculine, genitive', 901)
 
-    # todo finish inflection code tests for demonstrative pronouns
+    def testCode902(self):
+        self.c('demonstrative pronoun, masculine, dative', 902)
+
+    def testCode903(self):
+        self.c('demonstrative pronoun, masculine, accusative, animate', 903)
+
+    def testCode904(self):
+        self.c('demonstrative pronoun, masculine, accusative, inanimate', 904)
+
+    def testCode905(self):
+        self.c('demonstrative pronoun, masculine, instrumental', 905)
+
+    def testCode906(self):
+        self.c('demonstrative pronoun, masculine, prepositional', 906)
+
+    def testCode920(self):
+        self.c('demonstrative pronoun, plural, nominative', 920)
+
+    def testCode921(self):
+        self.c('demonstrative pronoun, plural, genitive', 921)
+
+    def testCode922(self):
+        self.c('demonstrative pronoun, plural, dative', 922)
+
+    def testCode923(self):
+        self.c('demonstrative pronoun, plural, accusative, animate', 923)
+
+    def testCode924(self):
+        self.c('demonstrative pronoun, plural, accusative, inanimate', 924)
+
+    def testCode925(self):
+        self.c('demonstrative pronoun, plural, instrumental', 925)
+
+    def testCode926(self):
+        self.c('demonstrative pronoun, plural, prepositional', 926)
+
+    def testCode907(self):
+        self.c('demonstrative pronoun, feminine, nominative', 907)
+
+    def testCode908(self):
+        self.c('demonstrative pronoun, feminine, genitive', 908)
+
+    def testCode909(self):
+        self.c('demonstrative pronoun, feminine, dative', 909)
+
+    def testCode910(self):
+        self.c('demonstrative pronoun, feminine, accusative', 910)
+
+    def testCode911(self):
+        self.c('demonstrative pronoun, feminine, instrumental', 911)
+
+    def testCode912(self):
+        self.c('demonstrative pronoun, feminine, prepositional', 912)
+
+    def testCode913(self):
+        self.c('demonstrative pronoun, neuter, nominative', 913)
+
+    def testCode914(self):
+        self.c('demonstrative pronoun, neuter, genitive', 914)
+
+    def testCode915(self):
+        self.c('demonstrative pronoun, neuter, dative', 915)
+
+    def testCode916(self):
+        self.c('demonstrative pronoun, neuter, accusative', 916)
+
+    def testCode917(self):
+        self.c('demonstrative pronoun, neuter, instrumental', 917)
+
+    def testCode918(self):
+        self.c('demonstrative pronoun, neuter, prepositional', 918)
+
+    # 919 was skipped
+    def testCode919(self):
+        self.c(None, 919)
+
+    # we don't have codes > 926
+    def testCode927(self):
+        self.c(None, 927)
 
