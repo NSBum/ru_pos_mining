@@ -146,7 +146,7 @@ pronoun_demonstrative:
     dative: 909
     accusative: 910
     instrumental: 911
-    prepositional: 913
+    prepositional: 912
   masculine:
     nominative: 900
     genitive: 901
@@ -157,12 +157,12 @@ pronoun_demonstrative:
     instrumental: 905
     prepositional: 906
   neuter:
-    nominative: 914
-    genitive: 915
-    dative: 916
-    accusative: 917
-    instrumental: 918
-    prepositional: 919
+    nominative: 913
+    genitive: 914
+    dative: 915
+    accusative: 916
+    instrumental: 917
+    prepositional: 918
   plural:
     nominative: 920
     genitive: 921
