@@ -36,9 +36,9 @@ def serve_word(w):
     w_tree = w_page.root_tree
     w_word = w_page.parse()
     if w_page.pos is None:
-        w_output = {'in': ru_word, 'error': 'Not found. Is this an uninflected form? Spelling?'}
+        w_output = {'inp': ru_word, 'error': 'Not found. Is this an uninflected form? Spelling?'}
     else:
-        w_output = {'in': ru_word, 'pos': w_page.pos.to_upos()}
+        w_output = {'inp': ru_word, 'pos': w_page.pos.to_upos()}
         w_outforms = []
         try:
             for w in w_word.inflection_code_list:
